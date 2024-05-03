@@ -1,8 +1,20 @@
-import { Input } from '@chakra-ui/react'
+import { Input, SystemStyleObject } from '@chakra-ui/react'
 import React from 'react'
 
 const SearchInput: React.FC = () => {
-	return <Input placeholder='Enter amount' bgColor='gray.100' />
+	const inputStyles: SystemStyleObject = {
+		border: 'none',
+		bgColor: 'gray.100',
+		_hover: {
+			border: 'none',
+			boxShadow: 'md',
+		},
+		_focus: {
+			border: 'none',
+			boxShadow: 'md',
+		},
+	}
+	return <Input placeholder='Enter amount' sx={inputStyles} />
 }
 
 export default SearchInput
