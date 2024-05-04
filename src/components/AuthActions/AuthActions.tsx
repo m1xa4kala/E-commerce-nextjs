@@ -6,7 +6,9 @@ const AuthActions: React.FC = () => {
 		<HStack>
 			<Avatar />
 			<Text>admin@gmail.com</Text>
-			<Button colorScheme='green'>Logout</Button>
+			<Button colorScheme='green' bg='green.300' _hover={{ bg: 'green.400' }}>
+				Logout
+			</Button>
 		</HStack>
 	)
 }
