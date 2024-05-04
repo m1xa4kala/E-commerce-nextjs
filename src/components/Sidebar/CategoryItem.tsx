@@ -3,7 +3,11 @@ import { PhoneIcon } from '@chakra-ui/icons'
 import { Button, SystemStyleObject } from '@chakra-ui/react'
 import React from 'react'
 
-const CategoryItem: React.FC = () => {
+type CategoryItemProps = {
+	title: string
+}
+
+const CategoryItem: React.FC<CategoryItemProps> = title => {
 	const categoryItemStyles: SystemStyleObject = {
 		color: 'blackAlpha.800',
 		borderRadius: 0,
@@ -25,7 +29,7 @@ const CategoryItem: React.FC = () => {
 	}
 	return (
 		<Button leftIcon={<PhoneIcon />} sx={categoryItemStyles}>
-			Category
+			{title.title}
 		</Button>
 	)
 }
