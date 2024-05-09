@@ -13,7 +13,7 @@ const ProductCard: React.FC<ProductCardProps> = product => {
 	return (
 		<Card minH='450px' justifyContent='space-between'>
 			<CardHeader>
-				<Image alt={product.title} src={product.thumbnail} width={300} height={200} />
+				<Image alt={product.title} src={product.thumbnail} width={300} height={300} h='auto' />
 				<Heading size='md'>{product.title}</Heading>
 			</CardHeader>
 			<CardFooter>

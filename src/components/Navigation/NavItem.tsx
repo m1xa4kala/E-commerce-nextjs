@@ -1,4 +1,6 @@
-import { SystemStyleObject, Text } from '@chakra-ui/react'
+'use client'
+import { Link } from '@chakra-ui/next-js'
+import { SystemStyleObject } from '@chakra-ui/react'
 import React from 'react'
 
 const NavItem: React.FC<{ name: string }> = props => {
@@ -9,7 +11,11 @@ const NavItem: React.FC<{ name: string }> = props => {
 			cursor: 'pointer',
 		},
 	}
-	return <Text sx={navItemStyle}>{props.name}</Text>
+	return (
+		<Link href={'/' + props.name.toLowerCase()} sx={navItemStyle}>
+			{props.name}
+		</Link>
+	)
 }
 
 export default NavItem
