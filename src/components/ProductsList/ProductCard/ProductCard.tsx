@@ -1,6 +1,5 @@
-'use client'
-import { Image } from '@chakra-ui/next-js'
 import { Button, Card, CardFooter, CardHeader, HStack, Heading, Text } from '@chakra-ui/react'
+import Image from 'next/image'
 import React from 'react'
 
 type ProductCardProps = {
@@ -11,9 +10,9 @@ type ProductCardProps = {
 
 const ProductCard: React.FC<ProductCardProps> = product => {
 	return (
-		<Card minH='450px' justifyContent='space-between'>
+		<Card minH='450px' width='300px' justifyContent='space-between'>
 			<CardHeader>
-				<Image alt={product.title} src={product.thumbnail} width={300} height={300} h='auto' />
+				<Image alt={product.title} src={product.thumbnail} width={300} height={300} />
 				<Heading size='md'>{product.title}</Heading>
 			</CardHeader>
 			<CardFooter>

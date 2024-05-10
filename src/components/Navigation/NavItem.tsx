@@ -12,7 +12,7 @@ const NavItem: React.FC<{ name: string }> = props => {
 		},
 	}
 	return (
-		<Link href={'/' + props.name.toLowerCase()} sx={navItemStyle}>
+		<Link href={'/' + props.name.toLowerCase().replace(' ', '')} sx={navItemStyle}>
 			{props.name}
 		</Link>
 	)
