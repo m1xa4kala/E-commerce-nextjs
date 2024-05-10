@@ -7,9 +7,69 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum Role {
+  ADMIN
+  MODERATOR
+  USER
+}
+
 model User {
   id String @id @default(cuid())
-  name String
   email String @unique
+  name String?
   password String
+  role Role @default(USER)
+  cart Cart?
+  reviews Review[]
+}
+
+model Cart {
+  id Int @id @default(autoincrement())
+  user User @relation(fields: [userId], references: [id])
+  userId String @unique
+  items CartItem[]
+}
+
+model Product {
+	id String @id @default(cuid())
+	title String
+	description String
+	price Int
+	discountPercentage Float
+	rating Float
+	stock Int
+	brand String
+	thumbnail String
+	images String
+	createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @updatedAt
+	categoryId Int
+  category Category @relation(fields: [categoryId], references: [id])
+  reviews Review[]
+  cart CartItem?
+}
+
+model CartItem {
+  id Int @id @default(autoincrement())
+  cartId Int
+  cart Cart @relation(fields: [cartId], references: [id])
+  product Product @relation(fields: [productId], references: [id])
+  productId String @unique
+}
+
+model Category {
+	id    Int    @id @default(autoincrement())
+	name  String
+	products Product[]
+}
+
+model Review {
+  id String @id @default(cuid())
+  content String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  authorId String
+  author User @relation(fields: [authorId], references: [id])
+  productId String
+  product Product @relation(fields: [productId], references: [id])
 }
