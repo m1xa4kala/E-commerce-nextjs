@@ -1,4 +1,4 @@
-import { Box, Flex, HStack, Heading, Text } from '@chakra-ui/react'
+import { Box, Flex, HStack, Heading } from '@chakra-ui/react'
 import React from 'react'
 import NavItem from './NavItem'
 
@@ -18,11 +18,18 @@ const Navigation: React.FC = () => {
 					Categories
 				</Heading>
 			</Box>
-			<HStack as='nav' justifyContent='space-between' flexGrow={1} bg='gray.200' px='40px' borderRadius='50px 10px 10px 10px'>
-				<NavItem name='Recommended'/>
-				<NavItem name='Popular'/>
-				<NavItem name='Favorite'/>
-				<NavItem name='Top discount'/>
+			<HStack
+				as='nav'
+				justifyContent='space-between'
+				flexGrow={1}
+				bg='gray.200'
+				px='40px'
+				borderRadius='50px 10px 10px 10px'
+			>
+				<NavItem name='Recommended' />
+				<NavItem name='Popular' />
+				<NavItem name='Favorite' />
+				<NavItem name='Top discount' />
 			</HStack>
 		</Flex>
 	)

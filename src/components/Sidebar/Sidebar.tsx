@@ -6,12 +6,10 @@ import CategoryItem from './CategoryItem'
 const Sidebar: React.FC = async () => {
 	const categories = await prisma.category.findMany()
 	return (
-		<VStack alignItems='start'>
-			<VStack spacing={0}>
-				{categories.map(category => {
-					return <CategoryItem key={category.id} title={category.name} />
-				})}
-			</VStack>
+		<VStack spacing={0} bgColor='gray.200' borderRadius='10px' py='15px'>
+			{categories.map(category => {
+				return <CategoryItem key={category.id} title={category.name} />
+			})}
 		</VStack>
 	)
 }

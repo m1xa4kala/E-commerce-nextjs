@@ -1,36 +1,45 @@
 'use client'
-import { PhoneIcon } from '@chakra-ui/icons'
-import { Button, SystemStyleObject } from '@chakra-ui/react'
-import React from 'react'
+import { Link as StyledLink, SystemStyleObject, Text } from '@chakra-ui/react'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 
 type CategoryItemProps = {
 	title: string
 }
 
 const CategoryItem: React.FC<CategoryItemProps> = title => {
+	const path = usePathname()
+	const isActive = path === `/category/${title.title}`
 	const categoryItemStyles: SystemStyleObject = {
 		color: 'blackAlpha.800',
-		borderRadius: 0,
 		fontWeight: 'sm',
 		justifyContent: 'start',
 		w: '250px',
-		py: '20px',
-		pl: '10px',
+		py: '10px',
+		pl: '15px',
+		transition: 'all 0.15s linear',
+		borderLeft: '2px solid',
+		borderColor: 'gray.200',
 		_hover: {
 			color: 'green.300',
-			bg: 'gray.200',
-			borderRadius: '10px',
+			borderLeft: '2px solid',
+			borderColor: 'green.300',
 		},
-		_active: {
-			color: 'white',
-			bg: 'green.300',
-			borderRadius: '10px',
+		'&.active': {
+			color: 'green.400',
+			borderLeft: '2px solid',
+			borderColor: 'green.400',
 		},
 	}
 	return (
-		<Button leftIcon={<PhoneIcon />} sx={categoryItemStyles}>
-			{title.title}
-		</Button>
+		<StyledLink
+			as={Link}
+			href={'/category/' + title.title}
+			sx={categoryItemStyles}
+			className={isActive ? 'active' : ''}
+		>
+			<Text>{title.title}</Text>
+		</StyledLink>
 	)
 }
 
