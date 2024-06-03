@@ -1,13 +1,9 @@
+import { loginUser } from '@/actions/Auth/Auth'
+import { SignInDTO } from '@/actions/Auth/types'
 import { Button, Checkbox, FormControl, FormLabel, HStack, Input, Spacer } from '@chakra-ui/react'
 import Link from 'next/link'
 import React from 'react'
 import { useForm } from 'react-hook-form'
-
-type SignInDTO = {
-	email: string
-	password: string
-	remember: boolean
-}
 
 const SignInForm: React.FC = () => {
 	const {
@@ -15,7 +11,7 @@ const SignInForm: React.FC = () => {
 		handleSubmit,
 		formState: { errors },
 	} = useForm<SignInDTO>()
-	const onSubmit = handleSubmit((data: SignInDTO) => console.log(data))
+	const onSubmit = handleSubmit(data => loginUser(data))
 	return (
 		<form onSubmit={onSubmit}>
 			<FormControl mb={4}>

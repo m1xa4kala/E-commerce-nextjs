@@ -1,23 +1,25 @@
 'use client'
-import { Button, FormControl, FormLabel, Input } from '@chakra-ui/react'
-import React from 'react'
+import { registerUser } from '@/actions/Auth/Auth'
+import { SingUpDTO } from '@/actions/Auth/types'
+import { Button, FormControl, FormLabel, Input, Text } from '@chakra-ui/react'
+import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 
-type SingUpDTO = {
-	email: string
-	username: string
-	password: string
-	confirmPassword: string
-}
-
 const SignUpForm: React.FC = () => {
+	const [error, setError] = useState<string>('')
 	const {
 		register,
 		handleSubmit,
 		formState: { errors },
 	} = useForm<SingUpDTO>()
-	const onSubmit = handleSubmit(data => console.log(data))
-	console.log(errors)
+	const onSubmit = handleSubmit(fromData => {
+		setError('')
+		registerUser(fromData).then(data => {
+			if (data?.error) {
+				setError(data.error)
+			}
+		})
+	})
 	return (
 		<form onSubmit={onSubmit}>
 			<FormControl mb={4}>
@@ -67,6 +69,11 @@ const SignUpForm: React.FC = () => {
 					focusBorderColor={errors.confirmPassword ? 'red.400' : 'green.400'}
 				/>
 			</FormControl>
+			{error && (
+				<Text bgColor='error.400' color='white' mb={4} p={4} borderRadius={10}>
+					{error}
+				</Text>
+			)}
 			<Button type='submit' colorScheme='green' bg='green.300' w='100%' mb={4} _hover={{ bg: 'green.400' }}>
 				Register
 			</Button>
