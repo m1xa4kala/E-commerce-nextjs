@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "theme-typings": "chakra-cli tokens ./src/theme/theme.(js|ts)"
   },
   "dependencies": {
     "@chakra-ui/icons": "^2.1.1",
@@ -18,9 +19,11 @@
     "framer-motion": "^11.1.7",
     "next": "14.2.3",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "react-hook-form": "^7.51.5"
   },
   "devDependencies": {
+    "@chakra-ui/cli": "^2.4.1",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",

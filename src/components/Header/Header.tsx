@@ -1,7 +1,7 @@
 import { Box, Flex, Heading } from '@chakra-ui/react'
 import Link from 'next/link'
 import React from 'react'
-import AuthActions from '../AuthActions/AuthActions'
+import AuthActions from './AuthActions/AuthActions'
 import Search from '../Search/Search'
 
 const Header: React.FC = () => {

@@ -1,19 +1,34 @@
-import { Box, FormControl, FormLabel, Heading, Input, VStack } from '@chakra-ui/react'
+import SignUpForm from '@/components/Auth/SignUpForm/SignUpForm'
+import { Box, Button, Heading, Text } from '@chakra-ui/react'
+import Link from 'next/link'
 import React from 'react'
 
 const SignUp: React.FC = () => {
 	return (
-		<Box>
-			<VStack>
-				<Heading>Login</Heading>
-				<form>
-					<FormControl>
-						<FormLabel>Email</FormLabel>
-						<Input placeholder='Email' />
-					</FormControl>
-				</form>
-			</VStack>
-		</Box>
+		<>
+			<Box padding={10} bg='white' w='50%'>
+				<Heading mb={8} fontWeight='thin'>
+					Sign Up
+				</Heading>
+				<SignUpForm />
+			</Box>
+			<Box
+				textAlign='center'
+				padding={10}
+				bgGradient='linear(135deg, green.200 0%, green.400 100%)'
+				color='white'
+				w='50%'
+			>
+				<Heading my={4} mt={12}>
+					Welcome to <br />
+					E-commerce
+				</Heading>
+				<Text mb={4}>Already have an account</Text>
+				<Button as={Link} mb={4} href='/sign-in' variant='outline'>
+					Sign In
+				</Button>
+			</Box>
+		</>
 	)
 }
 
