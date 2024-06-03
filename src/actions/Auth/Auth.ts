@@ -1,7 +1,6 @@
 'use server'
 
-import { getUserByEmail, getUserByName } from '@/data/user'
-import { prisma } from '@/lib/Prisma'
+import { createUser, getUserByEmail, getUserByName } from '@/data/user'
 import bcrypt from 'bcrypt'
 import { redirect } from 'next/navigation'
 import { SignInDTO, SingUpDTO } from './types'
@@ -20,7 +19,7 @@ export async function registerUser(formData: SingUpDTO) {
 		}
 		const salt = process.env.HASH_SALT || 10
 		const hashedPassword = await bcrypt.hash(password, +salt)
-		const user = await prisma.user.create({ data: { email, name: username, password: hashedPassword } })
+		const user = await createUser({ email, name: username, password: hashedPassword })
 		redirect('/')
 	} catch (err) {
 		return { error: 'Something went wrong' }
