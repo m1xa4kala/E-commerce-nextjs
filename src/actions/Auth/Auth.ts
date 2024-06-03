@@ -1,22 +1,30 @@
 'use server'
 
 import { getUserByEmail, getUserByName } from '@/data/user'
+import { prisma } from '@/lib/Prisma'
 import bcrypt from 'bcrypt'
+import { redirect } from 'next/navigation'
 import { SignInDTO, SingUpDTO } from './types'
 
 export async function registerUser(formData: SingUpDTO) {
-	const { email, username, password, confirmPassword } = formData
-	if (password !== confirmPassword) {
-		return { error: 'Password mismatch' }
+	try {
+		const { email, username, password, confirmPassword } = formData
+		if (password !== confirmPassword) {
+			return { error: 'Password mismatch' }
+		}
+		if (await getUserByEmail(email)) {
+			return { error: 'This email has already been used' }
+		}
+		if (await getUserByName(username)) {
+			return { error: 'This username has already been used' }
+		}
+		const salt = process.env.HASH_SALT || 10
+		const hashedPassword = await bcrypt.hash(password, +salt)
+		const user = await prisma.user.create({ data: { email, name: username, password: hashedPassword } })
+		redirect('/')
+	} catch (err) {
+		return { error: 'Something went wrong' }
 	}
-	if (await getUserByEmail(email)) {
-		return { error: 'This email has already been used' }
-	}
-	if (await getUserByName(username)) {
-		return { error: 'This username has already been used' }
-	}
-	const salt = process.env.HASH_SALT || 10
-	const hashedPassword = await bcrypt.hash(password, +salt)
 }
 
 export async function loginUser(formData: SignInDTO) {
