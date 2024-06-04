@@ -1,5 +1,5 @@
 'use client'
-import { registerUser } from '@/actions/Auth/Auth'
+import { registerUser } from '@/actions/Auth/register'
 import { SingUpDTO } from '@/actions/Auth/types'
 import { Button, FormControl, FormLabel, Input, Text } from '@chakra-ui/react'
 import React, { useState } from 'react'
@@ -14,9 +14,9 @@ const SignUpForm: React.FC = () => {
 	} = useForm<SingUpDTO>()
 	const onSubmit = handleSubmit(fromData => {
 		setError('')
-		registerUser(fromData).then(data => {
-			if (data?.error) {
-				setError(data.error)
+		registerUser(fromData).then(res => {
+			if (res?.error) {
+				setError(res.error)
 			}
 		})
 	})

@@ -1,9 +1,8 @@
 'use server'
-
 import { createUser, getUserByEmail, getUserByName } from '@/data/user'
 import bcrypt from 'bcrypt'
 import { redirect } from 'next/navigation'
-import { SignInDTO, SingUpDTO } from './types'
+import { SingUpDTO } from './types'
 
 export async function registerUser(formData: SingUpDTO) {
 	try {
@@ -19,13 +18,9 @@ export async function registerUser(formData: SingUpDTO) {
 		}
 		const salt = process.env.HASH_SALT || 10
 		const hashedPassword = await bcrypt.hash(password, +salt)
-		const user = await createUser({ email, name: username, password: hashedPassword })
-		redirect('/')
+		await createUser({ email, name: username, password: hashedPassword })
 	} catch (err) {
 		return { error: 'Something went wrong' }
 	}
-}
-
-export async function loginUser(formData: SignInDTO) {
-	console.log(formData)
+	redirect('/')
 }

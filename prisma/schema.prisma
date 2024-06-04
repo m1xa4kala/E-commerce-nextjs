@@ -26,7 +26,7 @@ model User {
 
 model Cart {
   id Int @id @default(autoincrement())
-  user User @relation(fields: [userId], references: [id])
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId String @unique
   items CartItem[]
 }
@@ -53,8 +53,8 @@ model Product {
 model CartItem {
   id Int @id @default(autoincrement())
   cartId Int
-  cart Cart @relation(fields: [cartId], references: [id])
-  product Product @relation(fields: [productId], references: [id])
+  cart Cart @relation(fields: [cartId], references: [id], onDelete: Cascade)
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
   productId String @unique
 }
 
@@ -70,7 +70,7 @@ model Review {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   authorId String
-  author User @relation(fields: [authorId], references: [id])
+  author User @relation(fields: [authorId], references: [id], onDelete: Cascade)
   productId String
-  product Product @relation(fields: [productId], references: [id])
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
 }
