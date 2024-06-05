@@ -13,6 +13,13 @@ async function isCorrectPassword(password: string, hash: string) {
 	}
 }
 
+/**
+ *
+ * TODO:
+ * Remember me logic
+ *
+ */
+
 export async function login(formData: SignInDTO) {
 	try {
 		const { email, password, remember } = formData
